@@ -1,0 +1,51 @@
+unarchive:
+  - path: /path/to/rar_or_zip/
+    rar:
+      expression: '.rar$'
+      ignore_case: true
+      delete_on_success: true
+      rename_on_error: true
+      error_stop: true
+    zip:
+      expression: '.zip$'
+      ignore_case: true
+      delete_on_success: true
+      rename_on_error: true
+      error_stop: true
+    gz: false
+    7z: false
+
+includes:
+  - /etc/unarchives.yaml
+  - ~/.unarchives.yaml
+
+default_behavior:
+  rar:
+    expression: '.rar$'
+    ignore_case: true
+    delete_on_success: true
+    rename_on_error: true
+    error_stop: true
+  zip:
+    expression: '.zip$'
+    ignore_case: true
+    delete_on_success: true
+    rename_on_error: true
+    error_stop: true
+  gz: false
+  7z: false
+
+replace:
+  chars:
+    - ['"', '']
+    - ['／', '']
+    - ['＜', '']
+    - ['＞', '']
+    - ['～', '-']
+    - ['：', '-']
+    - ['…', '']
+    - ['？', '']
+    - [':', '']
+    - ['\?', '']
+    - ['\*', '']
+    - ["\\", '']
