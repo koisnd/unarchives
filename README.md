@@ -7,6 +7,7 @@
 ## Requirements
 
 * python3-rarfile
+* unrar
 
 ## Installation
 

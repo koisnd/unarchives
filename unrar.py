@@ -2,6 +2,7 @@
 
 import os
 import shutil
+import subprocess
 
 import rarfile
 
@@ -26,8 +27,34 @@ def unrar(
                 os.rename(ext_path_tmp, ext_path)
             if delete_on_success:
                 os.remove(path)
+    except rarfile.RarUnknownError:
+        """
+        rarfile.RarUnknownError: Unknown exit code [1]:
+            b"bsdtar: Error opening archive: Failed to open '--'\n"
+        """
+        print(ext_path_tmp)
+        os.rmdir(ext_path_tmp)
+        if command_unrar(path) and error_stop:
+            raise
+
     except:
         if rename_on_error:
             os.rename(path, path + ".error")
         if error_stop:
             raise
+
+def command_unrar(path=None):
+    _cd = os.getcwd()
+    _wd = os.path.dirname(path)
+    os.chdir(_wd)
+    try:
+        _st = subprocess.check_output(
+            ['unrar', 'x', '-o+', path]).decode().rstrip()
+    except:
+        print(f'Error: extract error {path} .')
+        os.rename(path, f'{path}.error')
+        os.chdir(_cd)
+        return True
+    os.remove(path)
+    os.chdir(_cd)
+    return None
