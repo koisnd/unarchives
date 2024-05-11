@@ -15,7 +15,7 @@
 
 ```
 # apt update
-# apt install -qy python3-rarfile
+# apt install -qy python3-rarfile unrar
 # cd /usr/local/lib/python3*/dist-packages
 /usr/local/lib/python3.x/dist-packages# git clone https://github.com/koisnd/unarchives.git
 ```
