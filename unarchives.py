@@ -1,5 +1,6 @@
 """Unarchive main program."""
 
+import datetime
 import os
 import re
 import yaml
@@ -45,7 +46,7 @@ class Extruct(object):
     def do(self):
         """Unarchive"""
         if not self.target_files:
-            self.target_files = self.listing_targets()
+            self.target_files, _ = self.listing_targets()
         for _t in self.target_files:
             if _t.rsplit(".", 1)[-1].lower() == "rar":
                 unrar(
@@ -80,13 +81,22 @@ class Extruct(object):
                     return True
         return None
 
+    def still_writing(self, path):
+        if os.stat(path).st_mtime + 5 > datetime.datetime.now().timestamp():
+            return True
+        return False
+
     def listing_targets(self):
         """Listing files from directory"""
         _l = []
+        _dl = [] # delayed list
         for _d in self.target_dirs:
             for _cd, _, _f in os.walk(_d["path"]):
                 for _fp in _f:
                     _t = f'{_cd}/{_fp}'
                     if self.check_path_should_do(_t, _d):
-                        _l.append(_t)
-        return _l
+                        if self.still_writing(_t):
+                            _dl.append(_t)
+                        else:
+                            _l.append(_t)
+        return _l, _dl
