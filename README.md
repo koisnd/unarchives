@@ -7,6 +7,7 @@
 ## Requirements
 
 * python3-rarfile
+* python3-zc.lockfile
 * unrar
 
 ## Installation
