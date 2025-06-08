@@ -48,14 +48,17 @@ class Extruct(object):
         if not self.target_files:
             self.target_files, _ = self.listing_targets()
         for _t in self.target_files:
-            if _t.rsplit(".", 1)[-1].lower() == "rar":
+            _dtl = _t.lower().rsplit(".")
+            if _dtl[-1] == "rar":
+                if _dtl[-2].startswith('part') and not _dtl[-2] == 'part1':
+                    continue
                 unrar(
                     path=_t,
                     delete_on_success=True,
                     rename_on_error=True,
                     error_stop=True,
                 )
-            if _t.rsplit(".", 1)[-1].lower() == "zip":
+            elif _dtl[-1] == "zip":
                 unzip(
                     path=_t,
                     delete_on_success=True,
