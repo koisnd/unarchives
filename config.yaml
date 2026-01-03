@@ -12,8 +12,13 @@ unarchive:
       delete_on_success: true
       rename_on_error: true
       error_stop: true
+    7z:
+      expression: '.7z$'
+      ignore_case: true
+      delete_on_success: true
+      rename_on_error: true
+      error_stop: true
     gz: false
-    7z: false
 
 includes:
   - /etc/unarchives.yaml
@@ -32,8 +37,13 @@ default_behavior:
     delete_on_success: true
     rename_on_error: true
     error_stop: true
+  7z:
+    expression: '.7z$'
+    ignore_case: true
+    delete_on_success: true
+    rename_on_error: true
+    error_stop: true
   gz: false
-  7z: false
 
 replace:
   chars:
