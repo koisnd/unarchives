@@ -6,6 +6,7 @@ import re
 import yaml
 from unarchives.unrar import unrar
 from unarchives.unzip import unzip
+from unarchives.un7z import un7z
 
 class Extruct(object):
     """Initial values"""
@@ -60,6 +61,13 @@ class Extruct(object):
                 )
             elif _dtl[-1] == "zip":
                 unzip(
+                    path=_t,
+                    delete_on_success=True,
+                    rename_on_error=True,
+                    error_stop=True,
+                )
+            elif _dtl[-1] == "7z":
+                un7z(
                     path=_t,
                     delete_on_success=True,
                     rename_on_error=True,

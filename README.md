@@ -1,11 +1,13 @@
 # Unarchive files
 
 * This program unarchives recurcively. Supported file type is below.
-  * zip
   * rar
+  * z7
+  * zip
 
 ## Requirements
 
+* python3-py7zr
 * python3-rarfile
 * python3-zc.lockfile
 * unrar
