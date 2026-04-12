@@ -51,8 +51,9 @@ class Extruct(object):
         for _t in self.target_files:
             _dtl = _t.lower().rsplit(".")
             if _dtl[-1] == "rar":
-                if not re.search(r'^part0*1$', _dtl[-2], re.I):
-                    continue
+                if (_dtl[-2].startswith('part') and 
+                    not re.search(r'^part0*1$', _dtl[-2], re.I)):
+                        continue
                 unrar(
                     path=_t,
                     delete_on_success=True,
